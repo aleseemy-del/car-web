@@ -3,6 +3,7 @@ import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/lib/store";
 import { TabBar } from "@/components/layout/TabBar";
+import { Sidebar } from "@/components/layout/Sidebar";
 
 const tajawal = Tajawal({
   variable: "--font-tajawal",
@@ -26,11 +27,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ar" dir="rtl" className={tajawal.variable}>
       <body className="min-h-dvh">
         <AppProvider>
-          {/* إطار بعرض الجوال في الشاشات الكبيرة */}
-          <div className="relative mx-auto min-h-dvh w-full max-w-md bg-canvas shadow-2xl shadow-black">
-            <main className="px-5 pt-5 pb-32">{children}</main>
-            <TabBar />
+          {/* جوال: تطبيق بشريط سفلي · شاشة كبيرة: موقع بشريط جانبي */}
+          <div className="mx-auto flex min-h-dvh w-full max-w-md bg-canvas lg:max-w-none">
+            <Sidebar />
+            <main className="min-w-0 flex-1 px-5 pt-5 pb-32 lg:px-10 lg:pt-10 lg:pb-12">
+              <div className="mx-auto w-full lg:max-w-6xl">{children}</div>
+            </main>
           </div>
+          <TabBar />
         </AppProvider>
       </body>
     </html>

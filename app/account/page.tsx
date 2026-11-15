@@ -18,6 +18,8 @@ export default function AccountPage() {
         <div className="space-y-7">
           <ScreenHeader title="حسابي" />
 
+          <div className="space-y-7 lg:grid lg:grid-cols-2 lg:items-start lg:gap-8 lg:space-y-0">
+          <div className="space-y-7">
           <div className="flex items-center gap-3 rounded-card bg-surface p-4">
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-xl font-bold text-ink">{db.user.name.charAt(0)}</span>
             <div>
@@ -46,6 +48,7 @@ export default function AccountPage() {
               })}
             </ul>
           </section>
+          </div>
 
           <section>
             <SectionTitle title="الإعدادات" />
@@ -58,6 +61,7 @@ export default function AccountPage() {
               </label>
             </div>
           </section>
+          </div>
         </div>
       )}
     </DataGate>

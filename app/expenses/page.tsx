@@ -16,8 +16,11 @@ export default function ExpensesPage() {
         return (
           <div className="space-y-7">
             <ScreenHeader title="المصاريف" subtitle={`${car.model.split(" · ")[0]} · ${car.name}`} />
-            <ExpenseSummary expenses={expenses} />
-            <section>
+            <div className="space-y-7 lg:grid lg:grid-cols-5 lg:items-start lg:gap-8 lg:space-y-0">
+            <div className="lg:col-span-2">
+              <ExpenseSummary expenses={expenses} />
+            </div>
+            <section className="lg:col-span-3">
               <SectionTitle title="كل المصاريف" />
               <div className="overflow-hidden rounded-card bg-card">
                 {expenses.length === 0 ? (
@@ -27,6 +30,7 @@ export default function ExpensesPage() {
                 )}
               </div>
             </section>
+            </div>
           </div>
         );
       }}

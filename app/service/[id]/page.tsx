@@ -43,8 +43,17 @@ export default function ServicePage({ params }: { params: Promise<{ id: string }
         return (
           <div className="space-y-6">
             <ScreenHeader title={meta.title} subtitle={car.name} backHref="/" />
+            <div className="space-y-6 lg:grid lg:grid-cols-5 lg:items-start lg:gap-8 lg:space-y-0">
+            <div className="space-y-6 lg:col-span-2">
             <ServiceHero icon={meta.icon} tone={view.tone} headline={view.headline} summary={view.summary} />
             {view.progress && <ProgressCard {...view.progress} tone={view.tone === "neutral" ? "warning" : view.tone} />}
+            {meta.action && (
+              <div className="flex">
+                <Button onClick={book} icon="calendar" successLabel="تم حجز الموعد">{meta.action.label}</Button>
+              </div>
+            )}
+            </div>
+            <div className="space-y-6 lg:col-span-3">
             {view.stats.length > 0 && (
               <section><SectionTitle title="التفاصيل" /><StatGrid items={view.stats} /></section>
             )}
@@ -59,11 +68,8 @@ export default function ServicePage({ params }: { params: Promise<{ id: string }
                 </ul>
               </section>
             )}
-            {meta.action && (
-              <div className="flex">
-                <Button onClick={book} icon="calendar" successLabel="تم حجز الموعد">{meta.action.label}</Button>
-              </div>
-            )}
+            </div>
+            </div>
           </div>
         );
       }}

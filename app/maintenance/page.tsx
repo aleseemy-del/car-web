@@ -32,6 +32,8 @@ export default function MaintenancePage() {
         return (
           <div className="space-y-7">
             <ScreenHeader title="الصيانة" subtitle={car.name} />
+            <div className="space-y-7 lg:grid lg:grid-cols-5 lg:items-start lg:gap-8 lg:space-y-0">
+            <div className="space-y-7 lg:col-span-2">
             <NextMaintenanceCard car={car} />
 
             <section>
@@ -57,8 +59,9 @@ export default function MaintenancePage() {
                 )}
               </div>
             </section>
+            </div>
 
-            <section>
+            <section className="lg:col-span-3">
               <SectionTitle title="سجل الصيانة" />
               {all.length > 0 && (
                 <div className="mb-3 flex gap-2 overflow-x-auto pb-1" role="group" aria-label="تصفية السجل">
@@ -82,6 +85,7 @@ export default function MaintenancePage() {
                 </div>
               )}
             </section>
+            </div>
           </div>
         );
       }}

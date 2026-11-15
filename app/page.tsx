@@ -24,15 +24,21 @@ export default function HomePage() {
         });
         const oilLeft = car.oilDueKm != null ? car.oilDueKm - car.mileageKm : null;
         return (
-          <div className="space-y-4">
+          <div className="space-y-4 lg:space-y-6">
             <DashboardHeader userName={db.user.name} location="الكويت" hasNotifications={oilLeft != null && oilLeft <= OIL_WARN_KM} />
             <CarSwitcher cars={db.cars} activeId={car.id} onSelect={setActiveCar} />
-            <VehicleCard car={car} />
-            <section className="pt-2">
-              <SectionTitle title="الخدمات" />
-              <ServiceGrid items={items} />
-            </section>
-            {car.oilDueKm != null && <NextMaintenanceCard car={car} />}
+            <div className="space-y-4 lg:grid lg:grid-cols-5 lg:items-start lg:gap-8 lg:space-y-0">
+              <div className="lg:col-span-2">
+                <VehicleCard car={car} />
+              </div>
+              <div className="space-y-4 lg:col-span-3 lg:space-y-6">
+                <section className="pt-2 lg:rounded-card lg:bg-card lg:p-6">
+                  <SectionTitle title="الخدمات" />
+                  <ServiceGrid items={items} />
+                </section>
+                {car.oilDueKm != null && <NextMaintenanceCard car={car} />}
+              </div>
+            </div>
           </div>
         );
       }}
