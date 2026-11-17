@@ -1,7 +1,7 @@
 import {
   Battery, Bell, CalendarDays, Car, Check, ChevronLeft, ChevronRight, CircleAlert, ClipboardCheck, Cog, CloudOff,
   Disc3, Droplets, Ellipsis, Fuel, Home, MapPin, Plus, Route, ShieldCheck, Snowflake, Sparkles, Truck, User, Wallet,
-  Wrench, X, ArrowUpRight, Lightbulb, Loader2, RotateCw, LogOut, Gauge, type LucideProps,
+  Wrench, X, ArrowUpRight, Lightbulb, Loader2, RotateCw, LogOut, Gauge, MessageCircle, SendHorizontal, type LucideProps,
 } from "lucide-react";
 
 const ICONS = {
@@ -9,7 +9,7 @@ const ICONS = {
   clipboard: ClipboardCheck, shield: ShieldCheck, sparkles: Sparkles, truck: Truck, wrench: Wrench, cog: Cog,
   dots: Ellipsis, road: Route, car: Car, bell: Bell, calendar: CalendarDays, check: Check, close: X, plus: Plus,
   home: Home, wallet: Wallet, user: User, pin: MapPin, arrowUp: ArrowUpRight, bulb: Lightbulb, spinner: Loader2,
-  retry: RotateCw, cloudOff: CloudOff, logout: LogOut, gauge: Gauge, back: ChevronRight, next: ChevronLeft,
+  retry: RotateCw, cloudOff: CloudOff, logout: LogOut, gauge: Gauge, back: ChevronRight, next: ChevronLeft, chat: MessageCircle, send: SendHorizontal,
 } as const;
 
 export type IconName = keyof typeof ICONS;

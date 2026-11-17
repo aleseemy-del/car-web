@@ -11,6 +11,8 @@ import { NextMaintenanceCard } from "@/components/maintenance/NextMaintenanceCar
 import { HOME_SERVICE_KEYS, serviceMeta } from "@/lib/services";
 import { serviceView, OIL_WARN_KM } from "@/lib/status";
 import { useApp } from "@/lib/store";
+import Link from "next/link";
+import { Icon } from "@/components/ui/Icon";
 
 export default function HomePage() {
   const { setActiveCar } = useApp();
@@ -27,6 +29,14 @@ export default function HomePage() {
           <div className="space-y-4 lg:space-y-6">
             <DashboardHeader userName={db.user.name} location="الكويت" hasNotifications={oilLeft != null && oilLeft <= OIL_WARN_KM} />
             <CarSwitcher cars={db.cars} activeId={car.id} onSelect={setActiveCar} />
+            <Link href="/chat" className="flex items-center gap-3 rounded-card bg-accent p-4 text-ink transition active:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-accent"><Icon name="chat" size={20} /></span>
+              <span className="flex-1">
+                <span className="block text-base font-bold">عندك مشكلة في سيارتك؟</span>
+                <span className="block text-xs">اسأل المساعد يشخّصها ويعطيك الحل</span>
+              </span>
+              <Icon name="next" size={20} />
+            </Link>
             <div className="space-y-4 lg:grid lg:grid-cols-5 lg:items-start lg:gap-8 lg:space-y-0">
               <div className="lg:col-span-2">
                 <VehicleCard car={car} />
