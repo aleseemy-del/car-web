@@ -23,16 +23,20 @@ export default function ResetPasswordPage() {
   const [error, setError] = useState<string>();
 
   useEffect(() => {
-    const hash = new URLSearchParams(window.location.hash.slice(1));
-    const t = hash.get("access_token");
-    if (t && hash.get("type") === "recovery") {
-      setToken(t);
-      setStatus("ready");
-      // نشيل التوكن من شريط العنوان عشان ما ينحفظ في السجل
-      window.history.replaceState(null, "", window.location.pathname);
-    } else {
-      setStatus("invalid");
-    }
+    // نقرا الرابط بعد أول رسم (مو بشكل متزامن داخل الـ effect)
+    const id = window.setTimeout(() => {
+      const hash = new URLSearchParams(window.location.hash.slice(1));
+      const t = hash.get("access_token");
+      if (t && hash.get("type") === "recovery") {
+        setToken(t);
+        setStatus("ready");
+        // نشيل التوكن من شريط العنوان عشان ما ينحفظ في السجل
+        window.history.replaceState(null, "", window.location.pathname);
+      } else {
+        setStatus("invalid");
+      }
+    }, 0);
+    return () => window.clearTimeout(id);
   }, []);
 
   const save = async (e: React.FormEvent) => {
