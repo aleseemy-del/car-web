@@ -6,6 +6,9 @@ import { SYSTEM_PROMPT } from "@/lib/chatPrompt";
  * ملاحظة: الحد محفوظ في ذاكرة السيرفر، فهو "أفضل جهد" على Vercel (كل نسخة لها عدّادها).
  */
 
+// نماذج مجانية متاحة (تتغير مع الوقت). لو الأول مو متاح OpenRouter يجرّب اللي بعده تلقائيًا.
+const DEFAULT_MODELS = ["google/gemma-4-31b-it:free", "google/gemma-4-26b-a4b-it:free", "nvidia/nemotron-3-ultra-550b-a55b:free"];
+
 const MAX_MESSAGES = 12;
 const MAX_CHARS = 1000;
 const WINDOW_MS = 10 * 60_000;
@@ -85,7 +88,8 @@ export async function POST(request: Request) {
   const messages = parseMessages(body.messages);
   if (!messages) return json({ error: "طلب غير صحيح" }, 400);
 
-  const model = process.env.OPENROUTER_CHAT_MODEL || process.env.OPENROUTER_MODEL || "google/gemma-3-27b-it:free";
+  const envModel = process.env.OPENROUTER_CHAT_MODEL || process.env.OPENROUTER_MODEL;
+  const models = envModel ? [envModel] : DEFAULT_MODELS;
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 25_000);
   try {
@@ -94,7 +98,7 @@ export async function POST(request: Request) {
       signal: ctl.signal,
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model,
+        models,
         temperature: 0.4,
         max_tokens: 600,
         messages: [{ role: "system", content: SYSTEM_PROMPT + carBlock(body.car) }, ...messages],
